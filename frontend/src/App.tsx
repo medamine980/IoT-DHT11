@@ -1,7 +1,7 @@
 
-import Footer from './components/Footer';
-import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
+import Footer from './shared/Footer';
+import Navbar from './shared/Navbar'
+import Sidebar from './shared/Sidebar'
 import Dashboard from './Pages/Dashboard';
 
 function App() {
