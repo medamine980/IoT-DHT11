@@ -1,100 +1,137 @@
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
- function Sidebar() {
+function Sidebar() {
+  const location = useLocation(); // Permet de vérifier le chemin actuel pour activer le lien correspondant
+
   return (
     <nav id="sidebar" className="sidebar js-sidebar">
-    <div className="sidebar-content js-simplebar">
-        <a className="sidebar-brand" href="index.html">
-  <span className="align-middle">AdminKit</span>
-</a>
+      <div className="sidebar-content js-simplebar">
+        <a className="sidebar-brand" href="#">
+          <span className="align-middle">AdminKit</span>
+        </a>
 
         <ul className="sidebar-nav">
-            <li className="sidebar-header">
-                Pages
-            </li>
+          <li className="sidebar-header">Pages</li>
 
-            <li className="sidebar-item active">
-                <a className="sidebar-link" href="index.html">
-      <i className="align-middle" data-feather="sliders"></i> <span className="align-middle">Dashboard</span>
-    </a>
-            </li>
+          {/* Dashboard */}
+          <li className={`sidebar-item ${location.pathname === '/Dashboard' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/Dashboard">
+              <i className="align-middle" data-feather="sliders"></i> 
+              <span className="align-middle">Dashboard</span>
+            </Link>
+          </li>
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="pages-profile.html">
-      <i className="align-middle" data-feather="user"></i> <span className="align-middle">Profile</span>
-    </a>
-            </li>
+          {/* Historique */}
+          <li className={`sidebar-item ${location.pathname === '/History' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/History">
+              <i className="align-middle" data-feather="clock"></i> 
+              <span className="align-middle">Historique</span>
+            </Link>
+          </li>
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="pages-sign-in.html">
-      <i className="align-middle" data-feather="log-in"></i> <span className="align-middle">Sign In</span>
-    </a>
-            </li>
+          {/* Gestion des Incidents */}
+          <li className={`sidebar-item ${location.pathname === '/IncidentManagement' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/IncidentManagement">
+              <i className="align-middle" data-feather="alert-triangle"></i> 
+              <span className="align-middle">Gestion des Incidents</span>
+            </Link>
+          </li>
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="pages-sign-up.html">
-      <i className="align-middle" data-feather="user-plus"></i> <span className="align-middle">Sign Up</span>
-    </a>
-            </li>
+           {/* Archives des Incidents */}
+           <li className={`sidebar-item ${location.pathname === '/IncidentArchive' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/IncidentArchive">
+              <i className="align-middle" data-feather="archive"></i> 
+              <span className="align-middle">Archives des Incidents</span>
+            </Link>
+          </li>
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="pages-blank.html">
-      <i className="align-middle" data-feather="book"></i> <span className="align-middle">Blank</span>
-    </a>
-            </li>
+           {/* Archives des Incidents */}
+           <li className={`sidebar-item ${location.pathname === '/Administration' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/Administration">
+              <i className="align-middle" data-feather="archive"></i> 
+              <span className="align-middle">Administration</span>
+            </Link>
+          </li>
 
-            <li className="sidebar-header">
-                Tools & Components
-            </li>
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="ui-buttons.html">
-      <i className="align-middle" data-feather="square"></i> <span className="align-middle">Buttons</span>
-    </a>
-            </li>
+          {/* Profil */}
+          <li className={`sidebar-item ${location.pathname === '/UserProfile' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/UserProfile">
+              <i className="align-middle" data-feather="user"></i> 
+              <span className="align-middle">Profil</span>
+            </Link>
+          </li>
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="ui-forms.html">
-      <i className="align-middle" data-feather="check-square"></i> <span className="align-middle">Forms</span>
-    </a>
-            </li>
+          {/* Connexion */}
+          {/* <li className={`sidebar-item ${location.pathname === '/SignIn' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/SignIn">
+              <i className="align-middle" data-feather="log-in"></i> 
+              <span className="align-middle">Connexion</span>
+            </Link>
+          </li> */}
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="ui-cards.html">
-      <i className="align-middle" data-feather="grid"></i> <span className="align-middle">Cards</span>
-    </a>
-            </li>
+          {/* Inscription */}
+          {/* <li className={`sidebar-item ${location.pathname === '/SignUp' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/SignUp">
+              <i className="align-middle" data-feather="user-plus"></i> 
+              <span className="align-middle">Inscription</span>
+            </Link>
+          </li> */}
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="ui-typography.html">
-      <i className="align-middle" data-feather="align-left"></i> <span className="align-middle">Typography</span>
-    </a>
-            </li>
+          {/* Page Blanche */}
+          {/* <li className={`sidebar-item ${location.pathname === '/Blank' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/Blank">
+              <i className="align-middle" data-feather="book"></i> 
+              <span className="align-middle">Page Blanche</span>
+            </Link>
+          </li> */}
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="icons-feather.html">
-      <i className="align-middle" data-feather="coffee"></i> <span className="align-middle">Icons</span>
-    </a>
-            </li>
+          {/* <li className="sidebar-header">Outils & Composants</li> */}
 
-            
+          {/* Boutons */}
+          {/* <li className={`sidebar-item ${location.pathname === '/Buttons' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/Buttons">
+              <i className="align-middle" data-feather="square"></i> 
+              <span className="align-middle">Boutons</span>
+            </Link>
+          </li> */}
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="charts-chartjs.html">
-      <i className="align-middle" data-feather="bar-chart-2"></i> <span className="align-middle">Charts</span>
-    </a>
-            </li>
+          {/* Formulaires */}
+          {/* <li className={`sidebar-item ${location.pathname === '/Forms' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/Forms">
+              <i className="align-middle" data-feather="check-square"></i> 
+              <span className="align-middle">Formulaires</span>
+            </Link>
+          </li> */}
 
-            <li className="sidebar-item">
-                <a className="sidebar-link" href="maps-google.html">
-      <i className="align-middle" data-feather="map"></i> <span className="align-middle">Maps</span>
-    </a>
-            </li>
+          {/* Cartes */}
+          {/* <li className={`sidebar-item ${location.pathname === '/Cards' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/Cards">
+              <i className="align-middle" data-feather="grid"></i> 
+              <span className="align-middle">Cartes</span>
+            </Link>
+          </li> */}
+
+          {/* Graphiques */}
+          {/* <li className={`sidebar-item ${location.pathname === '/Charts' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/Charts">
+              <i className="align-middle" data-feather="bar-chart-2"></i> 
+              <span className="align-middle">Graphiques</span>
+            </Link>
+          </li> */}
+
+          {/* Cartes (Maps) */}
+          {/* <li className={`sidebar-item ${location.pathname === '/Maps' ? 'active' : ''}`}>
+            <Link className="sidebar-link" to="/Maps">
+              <i className="align-middle" data-feather="map"></i> 
+              <span className="align-middle">Cartes</span>
+            </Link>
+          </li> */}
         </ul>
-
-    
-    </div>
-</nav>
-  )
+      </div>
+    </nav>
+  );
 }
 
 export default Sidebar;

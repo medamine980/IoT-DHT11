@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.7",
+    "frontend": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
