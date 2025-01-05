@@ -1,22 +1,88 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Chart, registerables } from "chart.js";
+import { fetchSensorData, fetchSensorDataList, SensorData } from "../Services/apiService";
+import { data } from "react-router-dom";
 
 // Register Chart.js components
 Chart.register(...registerables);
 
+
+ function getDifference(prevDate: number) {
+  let dateNow = Date.now()
+  let diffInMs = (dateNow - prevDate);
+  const units = [
+    { unit: 'year', ms: 1000 * 60 * 60 * 24 * 365 },
+    { unit: 'month', ms: 1000 * 60 * 60 * 24 * 30 },
+    { unit: 'week', ms: 1000 * 60 * 60 * 24 * 7 },
+    { unit: 'day', ms: 1000 * 60 * 60 * 24 },
+    { unit: 'hour', ms: 1000 * 60 * 60 },
+    { unit: 'minute', ms: 1000 * 60 },
+    { unit: 'second', ms: 1000 },
+  ]
+  for (let { unit, ms } of units) {
+    const diff = Math.floor(diffInMs / ms);
+    if (diff > 1) {
+      return new Intl.RelativeTimeFormat('FR-fr',
+        { numeric: 'auto' }).format(
+          -diff,
+          unit as Intl.RelativeTimeFormatUnit)
+    }
+  }
+  return 'Maintenant';
+}
+
+
 export default function Dashboard() {
+  const [temperature, setTemperature] = useState<number | null>(null);
+  const [humidity, setHumidity] = useState<number | null>(null);
+  const [lastUpdate, setLastUpdate] = useState<string>("");
+
+  const [historicalData, setHistoricalData] = useState<SensorData[]>([]);
+
   const chartRefTemp = useRef<HTMLCanvasElement | null>(null);
-  const chartRefHumidity = useRef<HTMLCanvasElement | null>(null);
+  const chartRefHumidity = useRef(null);
   const chartInstanceTemp = useRef<Chart | null>(null);
   const chartInstanceHumidity = useRef<Chart | null>(null);
 
+  // Fetch data for cards and charts
   useEffect(() => {
-    const labels = ["6AM", "8AM", "10AM", "12PM", "2PM", "4PM", "6PM", "8PM"];
-    const temperatureData = [20, 22, 25, 30, 28, 26, 24, 27];
-    const humidityData = [55, 60, 62, 65, 70, 68, 66, 63];
+    const loadData = async () => {
+      try {
+        // Fetch latest data for cards
+        const latestData = await fetchSensorData();
+        setTemperature(latestData.temp);
+        setHumidity(latestData.hum);
+        var System_Date = new Date(latestData.dt).getTime();
 
-    // Température Chart
+        setLastUpdate(getDifference(System_Date));
+
+        // Fetch historical data for charts
+        const historical = await fetchSensorDataList();
+        console.log("historical", historical)
+        setHistoricalData(historical);
+      } catch (error) {
+        console.error("Failed to load data:", error);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // Update charts with historical data
+  useEffect(() => {
+    if (historicalData.length === 0) return;
+
+    const labels = historicalData.map((entry) =>
+
+      new Date(entry.dt).toLocaleTimeString()
+    
+    );
+    console.log("labels", labels);
+    const temperatureData = historicalData.map((entry) => entry.temp);
+    const humidityData = historicalData.map((entry) => entry.hum);
+
+    // Temperature Chart
     if (chartInstanceTemp.current) chartInstanceTemp.current.destroy();
     if (chartRefTemp.current) {
       chartInstanceTemp.current = new Chart(chartRefTemp.current, {
@@ -40,7 +106,7 @@ export default function Dashboard() {
       });
     }
 
-    // Humidité Chart
+    // Humidity Chart
     if (chartInstanceHumidity.current) chartInstanceHumidity.current.destroy();
     if (chartRefHumidity.current) {
       chartInstanceHumidity.current = new Chart(chartRefHumidity.current, {
@@ -73,7 +139,7 @@ export default function Dashboard() {
       if (chartInstanceTemp.current) chartInstanceTemp.current.destroy();
       if (chartInstanceHumidity.current) chartInstanceHumidity.current.destroy();
     };
-  }, []);
+  }, [historicalData]);
 
   return (
     <div className="container-fluid p-0">
@@ -89,11 +155,16 @@ export default function Dashboard() {
             <div className="card-body p-4">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className="card-title mb-0">Temperature</h5>
-                <i className="bi bi-thermometer text-primary" style={{ fontSize: "2rem" }}></i>
+                <i
+                  className="bi bi-thermometer text-primary"
+                  style={{ fontSize: "2rem" }}
+                ></i>
               </div>
-              <h1 className="mt-3 mb-3">25 <span>°C</span></h1>
+              <h1 className="mt-3 mb-3">
+                {temperature !== null ? `${temperature} °C` : "Loading..."}
+              </h1>
               <span className="text-success">
-                <i className="bi bi-arrow-down-right"></i> 20 min ago
+                Last update: {lastUpdate || "Loading..."}
               </span>
             </div>
           </div>
@@ -105,11 +176,16 @@ export default function Dashboard() {
             <div className="card-body p-4">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className="card-title mb-0">Humidity</h5>
-                <i className="bi bi-moisture text-info" style={{ fontSize: "2rem" }}></i>
+                <i
+                  className="bi bi-moisture text-info"
+                  style={{ fontSize: "2rem" }}
+                ></i>
               </div>
-              <h1 className="mt-3 mb-3">21%</h1>
+              <h1 className="mt-3 mb-3">
+                {humidity !== null ? `${humidity}%` : "Loading..."}
+              </h1>
               <span className="text-success">
-                <i className="bi bi-arrow-up-right"></i> 20 min ago
+                Last update: {lastUpdate || "Loading..."}
               </span>
             </div>
           </div>
