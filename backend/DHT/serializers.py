@@ -1,3 +1,4 @@
+from ._serializers.login_serializer import *
 from rest_framework import serializers
 from . import models
 
@@ -17,6 +18,8 @@ class UserSerializer(serializers.ModelSerializer):
         email = validated_data.pop('email', None)
         if password and email:
             user = self.Meta.model.objects.create_user(email=email, password=password, **validated_data)
-            user.save()
             return user
+        
+    def update(self, instance, validated_data):
+        return instance.objects.update_user(instance, **validated_data)
 

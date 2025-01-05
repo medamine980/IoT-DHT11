@@ -2,28 +2,40 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager, PermissionsMixin
 
 class CustomUserManager(UserManager):
-    def _create_user(self, email, password, **extra_fields):
+    def _create_user(self, email, password, groups=None, user_permissions=None, **extra_fields):
         if not email:
             raise ValueError('You have not provided a valid e-mail')
         
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
+        if groups: user.groups.set(groups)
+        if user_permissions: user.permissions.set(user_permissions)
         user.set_password(password)
-        print(user)
         user.save(using=self._db)
 
         return user
     
-    def create_user( self, email = None, password = None, **extra_fields):
-        print('YOLO')
+    def create_user( self, email = None, password = None, groups=None, user_permissions=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, password, **extra_fields)
+        return self._create_user(email, password, groups, user_permissions, **extra_fields)
     
-    def create_superuser( self, email = None, password = None, **extra_fields):
+    def create_superuser( self, email = None, password = None, groups=None, user_permissions=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        return self._create_user(email, password, **extra_fields)
+        return self._create_user(email, password, groups, user_permissions, **extra_fields)
+    
+    def update_user( self, instance, groups=None, user_permissions=None, **extra_fields):
+        for attr, value in extra_fields.items():
+            if attr == 'password':
+                instance.set_password(value)
+            else:
+                setattr(instance, attr, value)
+        if groups is not None:
+            instance.groups.set(groups)
+        if user_permissions is not None:
+            instance.permissions.set(user_permissions)
+        return instance
     
 
 class User(AbstractUser, PermissionsMixin):
