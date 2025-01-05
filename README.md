@@ -47,11 +47,11 @@ npm install
 
 ### User
 
-| Method | Path            | Description                          |
-| ------ | --------------- | ------------------------------------ |
-| GET    | /api/users      | Get all *users*                      |
-| GET    | /api/users/{id} | Get *user* with id={id}              |
-| POST   | /api/users      | Create new *user*                    |
-| PUT    | /api/users/{id} | Updates *user* with id={id}          |
-| PATCH  | /api/dhts/{id}  | Update partially *user* with id={id} |
-| DELETE | /api/users/{id} | Delete *user* with id={id}           |
+| Method | Path             | Description                          |
+| ------ | ---------------- | ------------------------------------ |
+| GET    | /api/users       | Get all *users*                      |
+| GET    | /api/users/{id}  | Get *user* with id={id}              |
+| POST   | /api/users       | Create new *user*                    |
+| PUT    | /api/users/{id}  | Updates *user* with id={id}          |
+| PATCH  | /api/users/{id}  | Update partially *user* with id={id} |
+| DELETE | /api/users/{id}  | Delete *user* with id={id}           |
