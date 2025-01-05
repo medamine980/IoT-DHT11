@@ -42,7 +42,8 @@ npm install
 
 | Method | Path                                               | Description                                    |
 | ------ | -------------------------------------------------- | ---------------------------------------------- |
-| GET    | /api/dhts?start_date=2025-01-01&end_date=2025-01-6 | Get all *DHTs* between start_date and end_date |
+| GET    | /api/dhts?start_date=YYYY-MM-DD&end_date=YYYY-DD-MM | Get all *DHTs* between start_date and end_date |
+| GET    | /api/dhts/export-csv?start_date=YYYY-MM-DD&end_date=YYYY-DD-MM | Export all *DHTs* between start_date and end_date in a CSV file |
 
 ### User
 
