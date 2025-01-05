@@ -9,11 +9,13 @@ class CustomUserManager(UserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
+        print(user)
         user.save(using=self._db)
 
         return user
     
     def create_user( self, email = None, password = None, **extra_fields):
+        print('YOLO')
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, password, **extra_fields)
@@ -44,3 +46,5 @@ class User(AbstractUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
