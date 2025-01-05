@@ -1,4 +1,5 @@
 import os
+import csv
 from ..models import DHT11
 from ..serializers import DHT11serialize
 from rest_framework.decorators import action
@@ -11,6 +12,7 @@ from ..alerts.telegram_alert import TelegramAlert
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from django.http import HttpResponse
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -96,3 +98,24 @@ class DHTViewSet(ModelViewSet):
             return Response({ "message": "There is no temperature"}, status=404)
         data_ser = DHT11serialize(last_record)
         return Response(data_ser.data, status=200)
+    
+    @action(['GET'], url_path='export-csv', detail=False)
+    def export_csv(self, request):
+        try:
+            queryset = super().get_queryset()
+            start_date = self.request.query_params.get('start_date')
+            end_date = self.request.query_params.get('end_date')
+            if start_date and end_date:
+                try:
+                    queryset = queryset.filter(dt__range=[start_date, end_date])
+                except ValueError:
+                    raise ValidationError({"detail": "Invalid date format. Use YYYY-MM-DD."})
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="dht.csv"'
+            writer = csv.writer(response)
+            writer.writerow(['id', 'temp', 'hum', 'dt'])
+            for entry in queryset:
+                writer.writerow([entry.id, entry.temp, entry.hum, entry.dt])
+            return response
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
