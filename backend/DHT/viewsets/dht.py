@@ -77,6 +77,18 @@ class DHTViewSet(ModelViewSet):
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        start_date = self.request.query_params.get('start_date')
+        end_date = self.request.query_params.get('end_date')
+        if start_date and end_date:
+            try:
+                queryset = queryset.filter(dt__range=[start_date, end_date])
+            except ValueError:
+                raise ValidationError({"detail": "Invalid date format. Use YYYY-MM-DD."})
+        
+        return queryset
+    
     @action(['GET'], url_path='last-data', detail=False)
     def last_data(self, request):
         last_record = DHT11.objects.last()
