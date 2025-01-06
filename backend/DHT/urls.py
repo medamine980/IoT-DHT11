@@ -3,11 +3,12 @@ from . import views
 from rest_framework.routers import DefaultRouter
 from .viewsets.user import UserViewSet
 from .viewsets.dht import DHTViewSet
+from .viewsets.incident import IncidentViewSet
 
 router = DefaultRouter()
 router.register('users', UserViewSet, basename='user')
 router.register('dhts', DHTViewSet, basename='DHT')
-router.register('incidents', DHTViewSet, basename='Incident')
+router.register('incidents', IncidentViewSet, basename='Incident')
 
 urlpatterns = [
     path('', views.home, name='home'),
