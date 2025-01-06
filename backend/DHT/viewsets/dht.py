@@ -1,7 +1,7 @@
 import os
 import csv
 from ..models import DHT11
-from ..serializers import DHT11serialize
+from ..serializers import DHT11serialize,IncidentSerializer
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.response import Response
@@ -67,10 +67,13 @@ class DHTViewSet(ModelViewSet):
             serializer.save()
             temp = DHT11.objects.last().temp
             if temp > ALERT_TEMP:
-#                 whatsapp_alert.send_message('Il y a une alerte importante sur votre Capteur\
-# la température dépasse le seuil')
+                # whatsapp_alert.send_message('Il y a une alerte importante sur votre Capteura température dépasse le seuil')
                 # email_alert.send_mail('TEMP', f'La température dépasse le seuil de {ALERT_TEMP}°C, Veuillez intervenir immédiatement pour vérifier et corriger cette situation')
                 telegram_alert.send_message(f'La température dépasse le seuil de {ALERT_TEMP}°C ,Veuillez intervenir immédiatement pour vérifier et corriger cette situation')
+                incident_serializer = IncidentSerializer(data=request.data)
+                if incident_serializer.is_valid():
+                    incident_serializer.save()
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
