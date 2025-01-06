@@ -7,6 +7,7 @@ from .viewsets.dht import DHTViewSet
 router = DefaultRouter()
 router.register('users', UserViewSet, basename='user')
 router.register('dhts', DHTViewSet, basename='DHT')
+router.register('incidents', DHTViewSet, basename='Incident')
 
 urlpatterns = [
     path('', views.home, name='home'),
