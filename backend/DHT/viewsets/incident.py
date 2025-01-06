@@ -9,7 +9,6 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 class IncidentViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin, 
-    mixins.CreateModelMixin,
     GenericViewSet
 ):
     queryset = Incident.objects.all()
