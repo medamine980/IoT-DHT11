@@ -1,5 +1,5 @@
 from ._serializers.login_serializer import LoginSerializer
-from ._serializers.incident_serializer import IncidentSerializer
+from ._serializers.incident_serializer import IncidentSerializer, ResolveIncidentSerializer
 from rest_framework import serializers
 from . import models
 
