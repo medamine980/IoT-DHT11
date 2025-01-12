@@ -5,7 +5,6 @@ import Navbar from './shared/Navbar';
 import Sidebar from './shared/Sidebar';
 import Dashboard from './Pages/Dashboard';
 import HistoryPage from './Pages/HistoryPage';
-import IncidentManagement from './Pages/IncidentManagement';
 import IncidentArchive from './Pages/IncidentArchive';
 import Administration from './Pages/Administration';
 import UserProfile from './Pages/UserProfile';
@@ -29,7 +28,6 @@ function App() {
                 <Route path='/' element={<Navigate to="/Dashboard" />} />
                 <Route path='/Dashboard' element={<Dashboard />} />
                 <Route path='/History' element={<HistoryPage />} />
-                <Route path='/IncidentManagement' element={<IncidentManagement />} />
                 <Route path='/IncidentArchive' element={<IncidentArchive />} />
                 <Route path='/Administration' element={<Administration />} />
                 <Route path='/UserProfile' element={<UserProfile />} />
