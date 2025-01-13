@@ -60,9 +60,9 @@ npm install
 
 | Method | Path               | Description                 |
 | ------ | ------------------ | --------------------------- |
-| GET    | /api/users/login   | Logs in the user |
-| GET    | /api/users/logout  | Logs out the current user |
-| GET    | /api/users/current-user  | Gets the current user|
+| GET    | /api/users/login   | Logs in the *user* |
+| GET    | /api/users/logout  | Logs out the current *user* |
+| GET    | /api/users/current-user  | Gets the current *user*|
 
 ### Incident
 
