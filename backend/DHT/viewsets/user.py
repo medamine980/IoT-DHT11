@@ -54,3 +54,7 @@ class UserViewSet(ModelViewSet):
     def logout(self, request):
         logout(request)
         return Response({'message': 'Logged out Successfuly!'}, status=200)
+    
+    @action(methods=['GET'], detail=False, url_path='current-user')
+    def current_user(self, request):
+        return Response(self.serializer_class(request.user).data, status=200)
