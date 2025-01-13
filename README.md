@@ -55,3 +55,24 @@ npm install
 | PUT    | /api/users/{id}  | Updates *user* with id={id}          |
 | PATCH  | /api/users/{id}  | Update partially *user* with id={id} |
 | DELETE | /api/users/{id}  | Delete *user* with id={id}           |
+
+#### Extra:
+
+| Method | Path               | Description                 |
+| ------ | ------------------ | --------------------------- |
+| GET    | /api/users/login   | Logs in the user |
+| GET    | /api/users/logout  | Logs out the current user |
+| GET    | /api/users/current-user  | Gets the current user|
+
+### Incident
+
+| Method | Path             | Description                          |
+| ------ | ---------------- | ------------------------------------ |
+| GET    | /api/incidents | Get all *incidents* |
+| GET    | /api/incidents/{id}  | Get *incident* with id={id}              |
+
+#### Extra
+
+| Method | Path             | Description                          |
+| ------ | ---------------- | ------------------------------------ |
+| PUT    | /api/incidents/{id}/resolve | Resolves *incident* with id={id} |
