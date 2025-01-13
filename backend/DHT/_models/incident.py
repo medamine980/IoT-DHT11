@@ -17,5 +17,6 @@ class Incident(models.Model):
         on_delete=models.CASCADE
     )
     status = models.CharField(max_length=25,default=STATUS[0][0],choices=STATUS)
+    comment = models.CharField(max_length=200, null=True)
 
 
