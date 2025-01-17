@@ -21,7 +21,7 @@ const LoginModal = () => {
     }
 
     const handleGoBack = () => {
-        navigate(-1);
+        navigate('/Dashboard');
     }
 
     const handleSubmit = (e: FormEvent<Element>) => {
