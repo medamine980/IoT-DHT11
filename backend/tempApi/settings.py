@@ -64,6 +64,9 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 
+SESSION_COOKIE_SECURE = True  # Set to True in production
+SESSION_COOKIE_SAMESITE = 'None'
+
 ROOT_URLCONF = 'tempApi.urls'
 
 TEMPLATES = [
