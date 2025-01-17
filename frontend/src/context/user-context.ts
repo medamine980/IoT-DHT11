@@ -3,7 +3,7 @@ import { UserInterface } from "../interfaces/user-interface";
 
 type UserContextType = {
     user: UserInterface | null,
-    setUser: (user: UserInterface) => void
+    setUser: (user: UserInterface | null) => void
 }
 
 const UserContext = createContext<UserContextType>({

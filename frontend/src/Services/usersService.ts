@@ -32,3 +32,15 @@ export const checkLogin = async () => {
     }
     return response.json();
 }
+
+export const logout = async () => {
+    const request = new Request(`${BASE_API_URI}/api/users/logout/`, {
+        method: 'GET',
+        credentials: 'include'
+    })
+    const response = await fetch(request);
+    if (response.status != 200) {
+        throw (await response.json());
+    }
+    return response.json();
+}

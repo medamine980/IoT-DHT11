@@ -38,7 +38,7 @@ const LoginModal = () => {
         }).catch(error => {
             toast(error.detail, {
                 type: "error"
-            })
+            });
         })
     }
 

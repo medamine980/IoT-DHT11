@@ -1,9 +1,19 @@
 import { useContext } from "react";
 import UserContext from "../context/user-context";
-import { Link } from "react-router-dom";
+import { logout } from "../Services/usersService";
+import { toast } from "react-toastify";
 
 function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  const handleLogout = () => {
+    logout().then(res => {
+      toast(res.message, {
+        type: 'success'
+      });
+      setUser(null);
+    })
+  }
 
   return (
     <nav className="navbar navbar-expand navbar-light navbar-bg">
@@ -74,7 +84,7 @@ function Navbar() {
                 className="nav-link d-inline-block"
                 href="#"
               >
-                <span className="btn btn-danger">Logout</span>
+                <button onClick={handleLogout} className="btn btn-danger">Logout</button>
               </a>
             </li>
             {/* Additional dropdown items */}
