@@ -67,6 +67,10 @@ CORS_ALLOW_CREDENTIALS = True
 SESSION_COOKIE_SECURE = True  # Set to True in production
 SESSION_COOKIE_SAMESITE = 'None'
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',  # React app's origin
+]
+
 ROOT_URLCONF = 'tempApi.urls'
 
 TEMPLATES = [
