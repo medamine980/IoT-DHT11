@@ -1,7 +1,7 @@
 import ReactModal from "react-modal";
 import "./LoginModal.css";
 import { FormEvent, FormEventHandler, useContext, useState } from "react";
-import { login } from "../../Services/usersService";
+import { checkLogin, login } from "../../Services/usersService";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import UserContext from "../../context/user-context";
@@ -33,8 +33,10 @@ const LoginModal = () => {
             toast(json.message, {
                 type: "success"
             });
-            setUser({ email });
-            handleClose();
+            checkLogin().then(user => {
+                setUser(user);
+                handleClose();
+            })
         }).catch(error => {
             toast(error.detail, {
                 type: "error"

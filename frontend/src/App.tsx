@@ -14,18 +14,22 @@ import { useEffect, useState } from 'react';
 import { checkLogin } from './Services/usersService';
 import Loading from './shared/Loading/Loading';
 import { UserInterface } from './interfaces/user-interface';
+import { setCsrfTokenInCookie } from './Services/csrfService';
 
 function App() {
   const [user, setUser] = useState<UserInterface | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // setCsrfTokenInCookie().then(() => {
     checkLogin().then(user => {
       console.log(user);
       setUser(user);
     }).finally(() => {
       setLoading(false);
     })
+    // })
+
   }, []);
 
   return (

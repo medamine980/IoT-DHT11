@@ -1,0 +1,28 @@
+.ReactModal__Content {
+    inset: max(40px, 20%) !important;
+}
+
+.ReactModal__Content .close-btn {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    color: gray;
+    justify-self: end;
+}
+
+.ReactModal__Content .close-btn:hover {
+    color: black;
+    transform: scale(1.5);
+}
+
+.ReactModal__Content .adduser-section {
+    height: 70%;
+    display: grid;
+    place-items: center;
+}
+
+.ReactModal__Content .adduser-section__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: .2em;
+}

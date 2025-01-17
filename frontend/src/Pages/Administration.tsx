@@ -1,19 +1,32 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import LoginModal from "../shared/LoginModal/LoginModal";
-import { checkLogin } from "../Services/usersService";
+import { checkLogin, getAllUsers } from "../Services/usersService";
 import Loading from "../shared/Loading/Loading";
 import UserContext from "../context/user-context";
+import { UserInterface } from "../interfaces/user-interface";
+import AddUserModal from "../shared/AddUserModal/AddUserModal";
 
 export default function AdminPage() {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [users, setUsers] = useState<UserInterface[]>([]);
+  const [isAddingUser, setIsAddingUser] = useState<boolean>(false);
   const { user } = useContext(UserContext);
+
+  const fetchAllUsers = useCallback(() => {
+    getAllUsers().then(users => setUsers(users));
+  }, []);
 
   useEffect(() => {
     checkLogin().then(() => {
       setIsLoggedIn(true);
+      fetchAllUsers();
     }).catch(() => setIsLoggedIn(false));
   }, [user]);
+
+  const iamAddingUser = () => {
+    setIsAddingUser(true);
+  }
 
   if (isLoggedIn === null) return <Loading />;
 
@@ -24,8 +37,8 @@ export default function AdminPage() {
 
         {/* Gestion Utilisateurs */}
         <h5>Gestion des Utilisateurs</h5>
-        <button className="btn btn-primary mb-3">Ajouter un utilisateur</button>
-
+        <button onClick={iamAddingUser} className="btn btn-primary mb-3">Ajouter un utilisateur</button>
+        {isAddingUser && <AddUserModal refetch={fetchAllUsers} setIsOpen={setIsAddingUser} />}
         <table className="table">
           <thead>
             <tr>
@@ -36,14 +49,17 @@ export default function AdminPage() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Admin</td>
-              <td>admin@example.com</td>
-              <td>Administrateur</td>
-              <td>
-                <button className="btn btn-sm btn-danger">Supprimer</button>
-              </td>
-            </tr>
+            {users.map((user) => (
+              <tr>
+                <td>{user.first_name === '' ? 'Inconnue' : user.first_name}</td>
+                <td>{user.email}</td>
+                <td>{user.roles ?? 'Not specified'}</td>
+                <td>
+                  <button className="btn btn-sm btn-danger">Supprimer</button>
+                </td>
+              </tr>
+            )
+            )}
           </tbody>
         </table>
 
