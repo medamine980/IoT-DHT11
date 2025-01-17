@@ -1,0 +1,1 @@
+export const BASE_API_URI = "https://medamine980.pythonanywhere.com";

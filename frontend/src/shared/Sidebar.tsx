@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import UserContext from '../context/user-context';
 
 function Sidebar() {
   const location = useLocation(); // Permet de vérifier le chemin actuel pour activer le lien correspondant
+  const { user } = useContext(UserContext);
 
   return (
     <nav id="sidebar" className="sidebar js-sidebar">
@@ -17,7 +19,7 @@ function Sidebar() {
           {/* Dashboard */}
           <li className={`sidebar-item ${location.pathname === '/Dashboard' ? 'active' : ''}`}>
             <Link className="sidebar-link" to="/Dashboard">
-              <i className="align-middle" data-feather="sliders"></i> 
+              <i className="align-middle" data-feather="sliders"></i>
               <span className="align-middle">Dashboard</span>
             </Link>
           </li>
@@ -25,7 +27,7 @@ function Sidebar() {
           {/* Historique */}
           <li className={`sidebar-item ${location.pathname === '/History' ? 'active' : ''}`}>
             <Link className="sidebar-link" to="/History">
-              <i className="align-middle" data-feather="clock"></i> 
+              <i className="align-middle" data-feather="clock"></i>
               <span className="align-middle">Historique</span>
             </Link>
           </li>
@@ -33,35 +35,37 @@ function Sidebar() {
           {/* Gestion des Incidents */}
           <li className={`sidebar-item ${location.pathname === '/IncidentManagement' ? 'active' : ''}`}>
             <Link className="sidebar-link" to="/IncidentManagement">
-              <i className="align-middle" data-feather="alert-triangle"></i> 
+              <i className="align-middle" data-feather="alert-triangle"></i>
               <span className="align-middle">Gestion des Incidents</span>
             </Link>
           </li>
 
-           {/* Archives des Incidents */}
-           <li className={`sidebar-item ${location.pathname === '/IncidentArchive' ? 'active' : ''}`}>
+          {/* Archives des Incidents */}
+          <li className={`sidebar-item ${location.pathname === '/IncidentArchive' ? 'active' : ''}`}>
             <Link className="sidebar-link" to="/IncidentArchive">
-              <i className="align-middle" data-feather="archive"></i> 
+              <i className="align-middle" data-feather="archive"></i>
               <span className="align-middle">Archives des Incidents</span>
             </Link>
           </li>
 
-           {/* Archives des Incidents */}
-           <li className={`sidebar-item ${location.pathname === '/Administration' ? 'active' : ''}`}>
+          {/* Archives des Incidents */}
+          <li className={`sidebar-item ${location.pathname === '/Administration' ? 'active' : ''}`}>
             <Link className="sidebar-link" to="/Administration">
-              <i className="align-middle" data-feather="archive"></i> 
+              <i className="align-middle" data-feather="archive"></i>
               <span className="align-middle">Administration</span>
             </Link>
           </li>
 
 
           {/* Profil */}
-          <li className={`sidebar-item ${location.pathname === '/UserProfile' ? 'active' : ''}`}>
-            <Link className="sidebar-link" to="/UserProfile">
-              <i className="align-middle" data-feather="user"></i> 
-              <span className="align-middle">Profil</span>
-            </Link>
-          </li>
+          {user &&
+            <li className={`sidebar-item ${location.pathname === '/UserProfile' ? 'active' : ''}`}>
+              <Link className="sidebar-link" to="/UserProfile">
+                <i className="align-middle" data-feather="user"></i>
+                <span className="align-middle">Profil</span>
+              </Link>
+            </li>
+          }
 
           {/* Connexion */}
           {/* <li className={`sidebar-item ${location.pathname === '/SignIn' ? 'active' : ''}`}>

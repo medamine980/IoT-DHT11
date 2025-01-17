@@ -8,39 +8,63 @@ import HistoryPage from './Pages/HistoryPage';
 import IncidentArchive from './Pages/IncidentArchive';
 import Administration from './Pages/Administration';
 import UserProfile from './Pages/UserProfile';
+import { ToastContainer } from 'react-toastify';
+import UserContext from './context/user-context';
+import { useEffect, useState } from 'react';
+import { checkLogin } from './Services/usersService';
+import Loading from './shared/Loading/Loading';
+import { UserInterface } from './interfaces/user-interface';
 
 function App() {
+  const [user, setUser] = useState<UserInterface | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    checkLogin().then(user => {
+      console.log(user);
+      setUser(user);
+    }).finally(() => {
+      setLoading(false);
+    })
+  }, []);
+
   return (
-    <Router>
-      <div className='wrapper'>
-       
-        <Sidebar />
+    <UserContext.Provider value={{ user, setUser }}>
+      {loading ?
+        <Loading />
+        :
+        <Router>
+          <div className='wrapper'>
+            <ToastContainer />
+            <Sidebar />
 
-        <div className="main">
-          
-          <Navbar />
+            <div className="main">
 
-         
-          <main className="content">
-            <div className="container-fluid p-0">
-              <Routes>
-                
-                <Route path='/' element={<Navigate to="/Dashboard" />} />
-                <Route path='/Dashboard' element={<Dashboard />} />
-                <Route path='/History' element={<HistoryPage />} />
-                <Route path='/IncidentArchive' element={<IncidentArchive />} />
-                <Route path='/Administration' element={<Administration />} />
-                <Route path='/UserProfile' element={<UserProfile />} />
+              <Navbar />
 
-              </Routes>
+
+              <main className="content">
+                <div className="container-fluid p-0">
+                  <Routes>
+
+                    <Route path='/' element={<Navigate to="/Dashboard" />} />
+                    <Route path='/Dashboard' element={<Dashboard />} />
+                    <Route path='/History' element={<HistoryPage />} />
+                    <Route path='/IncidentArchive' element={<IncidentArchive />} />
+                    <Route path='/Administration' element={<Administration />} />
+                    <Route path='/UserProfile' element={<UserProfile />} />
+
+                  </Routes>
+                </div>
+              </main>
+
+
+              <Footer />
             </div>
-          </main>
-
-          
-          <Footer />
-        </div>
-      </div>
-    </Router>
+          </div>
+        </Router>
+      }
+    </UserContext.Provider>
   );
 }
 

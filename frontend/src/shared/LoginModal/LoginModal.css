@@ -1,0 +1,34 @@
+.ReactModal__Content {
+    inset: 100px;
+}
+
+.ReactModal__Content .goback-btn {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .2s;
+    color: gray;
+    float: left;
+}
+
+.ReactModal__Content .goback-btn:hover {
+    color: black;
+    transform: scale(1.5);
+}
+
+.ReactModal__Content .login-section {
+    height: 70%;
+    display: grid;
+    place-items: center;
+}
+
+.ReactModal__Content .login-section__inputs-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: .5em;
+}
+
+.ReactModal__Content .login-section__inputs-container__input-container {
+    display: flex;
+    flex-direction: column;
+}
