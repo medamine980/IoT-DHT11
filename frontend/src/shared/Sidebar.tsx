@@ -10,7 +10,8 @@ function Sidebar() {
     <nav id="sidebar" className="sidebar js-sidebar">
       <div className="sidebar-content js-simplebar">
         <a className="sidebar-brand" href="#">
-          <span className="align-middle">AdminKit</span>
+          <img />
+          <span className="align-middle">Smart-IOT</span>
         </a>
 
         <ul className="sidebar-nav">
