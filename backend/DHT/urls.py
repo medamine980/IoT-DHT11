@@ -16,6 +16,7 @@ urlpatterns = [
 
     # path('download_csv/', views.download_csv, name='download_csv'),
     path('index/',views.table,name='table'),
+    path('csrf/', views.get_csrf_token)
     # path('myChartTemp/',views.graphiqueTemp,name='myChartTemp'),
     # path('myChartHum/', views.graphiqueHum, name='myChartHum'),
     

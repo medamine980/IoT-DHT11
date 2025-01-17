@@ -70,6 +70,9 @@ SESSION_COOKIE_SAMESITE = 'None'
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',  # React app's origin
 ]
+CSRF_COOKIE_SECURE = False  # Use True in production with HTTPS
+CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript to access the CSRF cookie
+
 
 ROOT_URLCONF = 'tempApi.urls'
 
