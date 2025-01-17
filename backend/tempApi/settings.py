@@ -72,6 +72,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 CSRF_COOKIE_SECURE = False  # Use True in production with HTTPS
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript to access the CSRF cookie
+CSRF_COOKIE_SAMESITE = 'None'  # Use 'None' if React and Django are on different domains
 
 
 ROOT_URLCONF = 'tempApi.urls'
