@@ -1,5 +1,6 @@
 from ..models import User
 from ..serializers import UserSerializer, LoginSerializer
+from ..authentication.csrf_exempt_session_authentication import CsrfExemptSessionAuthentication
 from django.contrib.auth import login, logout
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -8,10 +9,12 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import authenticate
+from rest_framework.authentication import BasicAuthentication 
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
     def get_permissions(self):
         if self.action in ['login', 'logout']:
