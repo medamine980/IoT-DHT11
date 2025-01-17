@@ -70,7 +70,7 @@ SESSION_COOKIE_SAMESITE = 'None'
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',  # React app's origin
 ]
-CSRF_COOKIE_SECURE = False  # Use True in production with HTTPS
+CSRF_COOKIE_SECURE = True  # Use True in production with HTTPS
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript to access the CSRF cookie
 CSRF_COOKIE_SAMESITE = 'None'  # Use 'None' if React and Django are on different domains
 
