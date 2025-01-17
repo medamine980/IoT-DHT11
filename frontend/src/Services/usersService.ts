@@ -89,3 +89,17 @@ export const addUser = async (user: AddUserInterface) => {
     }
     return response.json();
 }
+
+
+export const deleteUser = async (id: number) => {
+    // const csrftoken = getCookie('csrftoken');
+    const request = new Request(`${BASE_API_URI}/api/users/${id}/`, {
+        method: 'DELETE',
+        credentials: 'include'
+    })
+    const response = await fetch(request);
+    if (response.status != 204) {
+        throw (await response.json());
+    }
+}
+

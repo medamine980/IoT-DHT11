@@ -84,7 +84,7 @@ function Navbar() {
                 className="nav-link d-inline-block"
                 href="#"
               >
-                <button onClick={handleLogout} className="btn btn-danger">Logout</button>
+                <button onClick={handleLogout} className="btn btn-danger">Se déconnecter</button>
               </a>
             </li>
             {/* Additional dropdown items */}
@@ -99,7 +99,7 @@ function Navbar() {
                   className="avatar img-fluid rounded me-1"
                   alt="Charles Hall"
                 />
-                <span className="text-dark">{user.email.split('@')[0]}</span>
+                <span className="text-dark">{user.first_name[0] ?? user.email.split('@')[0]}</span>
               </a>
             </li>
           </ul>

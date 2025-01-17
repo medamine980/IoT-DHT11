@@ -1,10 +1,11 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import LoginModal from "../shared/LoginModal/LoginModal";
-import { checkLogin, getAllUsers } from "../Services/usersService";
+import { checkLogin, deleteUser, getAllUsers } from "../Services/usersService";
 import Loading from "../shared/Loading/Loading";
 import UserContext from "../context/user-context";
 import { UserInterface } from "../interfaces/user-interface";
 import AddUserModal from "../shared/AddUserModal/AddUserModal";
+import { toast } from "react-toastify";
 
 export default function AdminPage() {
 
@@ -26,6 +27,16 @@ export default function AdminPage() {
 
   const iamAddingUser = () => {
     setIsAddingUser(true);
+  }
+
+  const handleDelete = (id: number) => {
+    if (!confirm('Tu veux vraiment supprimer cet utilisateur?')) return;
+    deleteUser(id).then(() => {
+      toast("L'utilisateur a été supprimer avec succès!", { type: 'success' });
+      fetchAllUsers();
+    }).catch(err => {
+      toast(err.detail, { type: "error" });
+    });
   }
 
   if (isLoggedIn === null) return <Loading />;
@@ -55,7 +66,7 @@ export default function AdminPage() {
                 <td>{user.email}</td>
                 <td>{user.roles ?? 'Not specified'}</td>
                 <td>
-                  <button className="btn btn-sm btn-danger">Supprimer</button>
+                  <button className="btn btn-sm btn-danger" onClick={() => handleDelete(user.id)}>Supprimer</button>
                 </td>
               </tr>
             )
@@ -64,7 +75,7 @@ export default function AdminPage() {
         </table>
 
         {/* Paramètres */}
-        <h5 className="mt-4">Paramètres</h5>
+        {/* <h5 className="mt-4">Paramètres</h5>
         <form>
           <div className="mb-3">
             <label>Email Notification</label>
@@ -75,7 +86,7 @@ export default function AdminPage() {
             <input type="number" className="form-control" placeholder="10" />
           </div>
           <button className="btn btn-success">Sauvegarder</button>
-        </form>
+        </form> */}
       </div>
       :
       <LoginModal />
