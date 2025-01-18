@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Chart, registerables } from "chart.js";
 import { fetchSensorData, fetchSensorDataList, SensorData } from "../Services/apiService";
-import { data } from "react-router-dom";
 
 // Register Chart.js components
 Chart.register(...registerables);
 
 
- function getDifference(prevDate: number) {
+function getDifference(prevDate: number) {
   let dateNow = Date.now()
   let diffInMs = (dateNow - prevDate);
   const units = [
@@ -76,7 +75,7 @@ export default function Dashboard() {
     const labels = historicalData.map((entry) =>
 
       new Date(entry.dt).toLocaleTimeString()
-    
+
     );
     console.log("labels", labels);
     const temperatureData = historicalData.map((entry) => entry.temp);

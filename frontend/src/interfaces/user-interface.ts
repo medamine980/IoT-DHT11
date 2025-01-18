@@ -8,7 +8,7 @@ interface BaseUserInterface {
 
 export interface UserInterface extends BaseUserInterface {
     id: number
-
+    last_login: string
 }
 
 export interface AddUserInterface extends BaseUserInterface {

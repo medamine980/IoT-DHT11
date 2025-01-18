@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import UserContext from '../context/user-context';
 
@@ -15,7 +15,7 @@ function Sidebar() {
         </a>
 
         <ul className="sidebar-nav">
-          <li className="sidebar-header">Pages</li>
+          {/* <li className="sidebar-header">Pages</li> */}
 
           {/* Dashboard */}
           <li className={`sidebar-item ${location.pathname === '/Dashboard' ? 'active' : ''}`}>

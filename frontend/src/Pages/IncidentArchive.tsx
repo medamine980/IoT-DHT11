@@ -6,7 +6,7 @@ const BlogStyleIncidentList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const userId = 123; // Replace with actual user ID from session or context
+  // const userId = 123; // Replace with actual user ID from session or context
 
   // Fetch incidents on component mount
   useEffect(() => {
@@ -26,41 +26,41 @@ const BlogStyleIncidentList: React.FC = () => {
   }, []);
 
   // Handle resolving an incident using PUT request
-  const handleResolve = async (id: number) => {
-    console.log(`Resolving incident with ID: ${id} by User ID: ${userId}`);
+  // const handleResolve = async (id: number) => {
+  //   console.log(`Resolving incident with ID: ${id} by User ID: ${userId}`);
 
-    try {
-      const response = await fetch(
-        `https://medamine980.pythonanywhere.com/api/incidents/${id}/resolve/`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type':  'application/json',
-          },
-          body: JSON.stringify({
-            
-            resolver: 1, // Include the user ID
-          }),
-        }
-      );
+  //   try {
+  //     const response = await fetch(
+  //       `https://medamine980.pythonanywhere.com/api/incidents/${id}/resolve/`,
+  //       {
+  //         method: 'PUT',
+  //         headers: {
+  //           'Content-Type':  'application/json',
+  //         },
+  //         body: JSON.stringify({
 
-      if (!response.ok) {
-        throw new Error(`Failed to resolve incident with ID: ${id}`);
-      }
+  //           resolver: 1, // Include the user ID
+  //         }),
+  //       }
+  //     );
 
-      const updatedIncident = await response.json();
-      console.log(`Incident #${id} resolved successfully.`, updatedIncident);
+  //     if (!response.ok) {
+  //       throw new Error(`Failed to resolve incident with ID: ${id}`);
+  //     }
 
-      // Update the local state with the resolved incident
-      setIncidents((prevIncidents) =>
-        prevIncidents.map((incident) =>
-          incident.id === id ? updatedIncident : incident
-        )
-      );
-    } catch (error) {
-      console.error(`Error resolving incident with ID ${id}:`, error);
-    }
-  };
+  //     const updatedIncident = await response.json();
+  //     console.log(`Incident #${id} resolved successfully.`, updatedIncident);
+
+  //     // Update the local state with the resolved incident
+  //     setIncidents((prevIncidents) =>
+  //       prevIncidents.map((incident) =>
+  //         incident.id === id ? updatedIncident : incident
+  //       )
+  //     );
+  //   } catch (error) {
+  //     console.error(`Error resolving incident with ID ${id}:`, error);
+  //   }
+  // };
 
   if (loading) {
     return <p>Loading incidents...</p>;
@@ -95,7 +95,7 @@ const BlogStyleIncidentList: React.FC = () => {
                 <span className="text-muted">Aucun commentaire</span>
               )}
             </p>
-         
+
           </div>
         </div>
       ))}

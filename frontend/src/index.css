@@ -1,0 +1,4 @@
+input:is(:read-only, :focus, :active) {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}

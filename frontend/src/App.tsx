@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import { checkLogin } from './Services/usersService';
 import Loading from './shared/Loading/Loading';
 import { UserInterface } from './interfaces/user-interface';
-import { setCsrfTokenInCookie } from './Services/csrfService';
+import IncidentManagement from './Pages/IncidentManagement';
 
 function App() {
   const [user, setUser] = useState<UserInterface | null>(null);
@@ -23,7 +23,6 @@ function App() {
   useEffect(() => {
     // setCsrfTokenInCookie().then(() => {
     checkLogin().then(user => {
-      console.log(user);
       setUser(user);
     }).finally(() => {
       setLoading(false);
@@ -54,6 +53,7 @@ function App() {
                     <Route path='/' element={<Navigate to="/Dashboard" />} />
                     <Route path='/Dashboard' element={<Dashboard />} />
                     <Route path='/History' element={<HistoryPage />} />
+                    <Route path='/IncidentManagement' element={<IncidentManagement />} />
                     <Route path='/IncidentArchive' element={<IncidentArchive />} />
                     <Route path='/Administration' element={<Administration />} />
                     <Route path='/UserProfile' element={<UserProfile />} />

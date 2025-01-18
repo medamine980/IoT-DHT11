@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchSensorDataList, fetchFilteredSensorData, SensorData } from '../Services/apiService';
 
 export default function HistoryPage() {
@@ -79,7 +79,7 @@ export default function HistoryPage() {
   return (
     <div className="container-fluid p-4">
       <h1 className="h3 mb-3">Historique des Données</h1>
-      
+
       {/* Filters */}
       <div className="row mb-3">
         <div className="col-md-3">

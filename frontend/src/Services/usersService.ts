@@ -58,23 +58,7 @@ export const getAllUsers = async (): Promise<UserInterface[]> => {
     return response.json();
 }
 
-function getCookie(name: string) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue ?? '';
-}
-
 export const addUser = async (user: AddUserInterface) => {
-    // const csrftoken = getCookie('csrftoken');
     const request = new Request(`${BASE_API_URI}/api/users/`, {
         method: 'POST',
         body: JSON.stringify(user),

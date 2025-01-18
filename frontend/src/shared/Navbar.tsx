@@ -99,7 +99,7 @@ function Navbar() {
                   className="avatar img-fluid rounded me-1"
                   alt="Charles Hall"
                 />
-                <span className="text-dark">{user.first_name[0] ?? user.email.split('@')[0]}</span>
+                <span className="text-dark">{user.first_name ? user.first_name : user.email.split('@')[0]}</span>
               </a>
             </li>
           </ul>
