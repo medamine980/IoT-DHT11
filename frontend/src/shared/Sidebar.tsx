@@ -10,7 +10,7 @@ function Sidebar() {
     <nav id="sidebar" className="sidebar js-sidebar">
       <div className="sidebar-content js-simplebar">
         <a className="sidebar-brand" href="#">
-          <img />
+          <img src="/smart-iot-logo.jpeg" width={100} className='d-block' />
           <span className="align-middle">Smart-IOT</span>
         </a>
 

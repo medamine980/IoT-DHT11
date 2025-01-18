@@ -13,7 +13,7 @@ export const fetchLastIncident = async () => {
 
 export const resolveIncident = async (id: number, comment: string) => {
     const request = new Request(`${BASE_API_URI}/api/incidents/${id}/resolve/`, {
-        method: 'PUT',
+        method: 'PATCH',
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json'

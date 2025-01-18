@@ -50,7 +50,7 @@ export default function IncidentManagement() {
         e.preventDefault();
         resolveIncident(lastIncident.id, comment).then(() => {
             toast("L'incident a été résolu", { type: 'success' });
-            _fetchLastIncident();
+            setLastIncident(null);
         });
     }
 
