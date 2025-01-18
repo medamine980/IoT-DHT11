@@ -76,8 +76,9 @@ class DHTViewSet(ModelViewSet):
 
             else:
                 last_incident = Incident.objects.filter(status=0).last()
-                last_incident.status = 1
-                last_incident.save()
+                if last_incident is not None:
+                    last_incident.status = 1    
+                    last_incident.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
