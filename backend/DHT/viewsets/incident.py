@@ -45,7 +45,7 @@ class IncidentViewSet(
         if request.method == 'GET':
             return Response(self.serializer_class(instance).data)
         instance.status = 1
-        instance.resolver = request.user.id
+        instance.resolver = request.user
         serializer = self.serializer_class(instance, data=request.data)
         if serializer.is_valid():
             serializer.save()
