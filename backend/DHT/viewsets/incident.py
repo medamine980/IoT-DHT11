@@ -39,16 +39,17 @@ class IncidentViewSet(
         data_ser = IncidentSerializer(last_record)
         return Response(data_ser.data, status=200)
 
-    @action(methods=['PUT', 'GET'], detail=True, serializer_class=ResolveIncidentSerializer)
+    @action(methods=['PATCH', 'GET'], detail=True, serializer_class=ResolveIncidentSerializer)
     def resolve(self, request, pk):
         instance = self.get_object()
         if request.method == 'GET':
             return Response(self.serializer_class(instance).data)
         instance.status = 1
-        instance.resolver = request.user
+        request.data['resolver'] = request.user.id
         serializer = self.serializer_class(instance, data=request.data)
         if serializer.is_valid():
             serializer.save()
-        return Response(self.serializer_class(instance).data, status=203)
+        print(serializer.error_messages)
+        return Response(self.serializer_class(instance).data, status=200)
 
    

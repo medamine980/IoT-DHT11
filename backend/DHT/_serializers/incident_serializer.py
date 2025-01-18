@@ -13,4 +13,4 @@ class ResolveIncidentSerializer(serializers.ModelSerializer):
       )
       class Meta:
             model = Incident
-            fields = ['resolver']
+            fields = ['resolver', 'comment']
