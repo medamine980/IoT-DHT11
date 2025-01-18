@@ -2,9 +2,11 @@ import { useContext } from "react";
 import UserContext from "../context/user-context";
 import { logout } from "../Services/usersService";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout().then(res => {
@@ -12,6 +14,7 @@ function Navbar() {
         type: 'success'
       });
       setUser(null);
+      navigate('/Dashboard')
     })
   }
 
