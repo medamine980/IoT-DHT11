@@ -89,11 +89,13 @@ const BlogStyleIncidentList: React.FC = () => {
               )}
               <br />
               <strong>Commentaire:</strong>{' '}
-              {incident.resolver ? (
-                <span>{`Résolu par User ID: ${incident.resolver}`}</span>
-              ) : (
-                <span className="text-muted">Aucun commentaire</span>
-              )}
+              {incident.comment ?
+                <span>{incident.comment}</span> :
+                incident.resolver ? (
+                  <span>{`Résolu par User ID: ${incident.resolver}`}</span>
+                ) : (
+                  <span className="text-muted">Aucun commentaire</span>
+                )}
             </p>
 
           </div>

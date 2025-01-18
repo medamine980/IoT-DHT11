@@ -12,6 +12,7 @@ export interface IncidentData {
   dt: string;
   status: number; // 0 for unresolved, 1 for resolved
   resolver: string | null; // Optional field for who resolved the incident
+  comment: string
 }
 
 // Fetch the last recorded sensor data
