@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
     <meta charset="UTF-8">
     <title>Accueil</title>
     <style>
-         {% load static %}
+        {
+            % load static %
+        }
+
         body {
             background-image: url("{% static 'images/1_Blog_Featured_Image-scaled-1.jpg' %}");
             background-size: cover;
@@ -31,13 +35,15 @@
         h1 {
             color: white;
             margin-top: 0;
-            background-color: rgba(0, 0, 0, 0); /* Semi-transparent black background */
+            background-color: rgba(0, 0, 0, 0);
+            /* Semi-transparent black background */
             padding: 10px 20px;
             border-radius: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        p {color: white;
+        p {
+            color: white;
             margin: 20px auto;
             width: 80%;
             font-size: 1.2em;
@@ -74,16 +80,21 @@
         }
     </style>
 </head>
+
 <body>
     <div class="content">
         <h1>Bienvenue sur la page d'accueil</h1>
         <p>
-            Bienvenue sur notre site dédié à l'Internet des objets (IoT) ! Ici, vous pouvez afficher les données de température et d'humidité en temps réel sous forme de tableaux et de graphiques, ainsi que consulter les données JSON. Utilisez le bouton ci-dessous pour accéder aux différentes pages.
+            Bienvenue sur notre site dédié à l'Internet des objets (IoT) ! Ici, vous pouvez afficher les données de
+            température et d'humidité en temps réel sous forme de tableaux et de graphiques, ainsi que consulter les
+            données JSON. Utilisez le bouton ci-dessous pour accéder aux différentes pages.
         </p>
         <ul>
-            <li><a href="{% url 'table' %}">application</a></li>
+            <!-- <li><a href="{% url 'table' %}">application</a></li> -->
+            <li><a href="/Dashboard">application</a></li>
 
         </ul>
     </div>
 </body>
+
 </html>

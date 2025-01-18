@@ -1,9 +1,10 @@
-from django.urls import path, include
+from django.urls import path, include,re_path
 from . import views
 from rest_framework.routers import DefaultRouter
 from .viewsets.user import UserViewSet
 from .viewsets.dht import DHTViewSet
 from .viewsets.incident import IncidentViewSet
+from django.conf import settings
 
 router = DefaultRouter()
 router.register('users', UserViewSet, basename='user')
@@ -16,7 +17,9 @@ urlpatterns = [
 
     # path('download_csv/', views.download_csv, name='download_csv'),
     path('index/',views.table,name='table'),
-    path('csrf/', views.get_csrf_token)
+    path('csrf/', views.get_csrf_token),
+    re_path(r"^(?P<path>.*)$", views.serve_react, {"document_root": settings.REACT_APP_BUILD_PATH}),
+
     # path('myChartTemp/',views.graphiqueTemp,name='myChartTemp'),
     # path('myChartHum/', views.graphiqueHum, name='myChartHum'),
     

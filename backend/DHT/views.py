@@ -1,7 +1,8 @@
+import posixpath
+import csv
 from django.shortcuts import render
 from .models import DHT11 # Assurez-vous d'importer le modèle DHT11
 from django.utils import timezone
-import csv
 from django.http import HttpResponse
 from django.utils import timezone
 from django.http import JsonResponse
@@ -16,6 +17,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
+from pathlib import Path
+
+from django.utils._os import safe_join
+from django.views.static import serve as static_serve
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -23,6 +28,15 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 def get_csrf_token(request):
     return JsonResponse({'message': 'CSRF cookie set.'})
+
+
+def serve_react(request, path, document_root=None):
+    path = posixpath.normpath(path).lstrip("/")
+    fullpath = Path(safe_join(document_root, path))
+    if fullpath.is_file():
+        return static_serve(request, path, document_root)
+    else:
+        return static_serve(request, "index.html", document_root)
 
 def home(request):
     return render(request, 'home.html')
