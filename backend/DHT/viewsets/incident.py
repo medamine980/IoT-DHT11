@@ -1,10 +1,13 @@
 from ..models import Incident
 from ..serializers import IncidentSerializer, ResolveIncidentSerializer
+from ..authentication.csrf_exempt_session_authentication import CsrfExemptSessionAuthentication
 from rest_framework import status, mixins
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.authentication import BasicAuthentication 
+
 
 class IncidentViewSet(
     mixins.ListModelMixin,
@@ -13,6 +16,7 @@ class IncidentViewSet(
 ):
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
+    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
     def get_permissions(self):
         if self.action in ['resolve']:
