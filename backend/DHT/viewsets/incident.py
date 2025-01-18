@@ -20,6 +20,16 @@ class IncidentViewSet(
     #     instance.status = 1
     #     pass
 
+    @action(['GET'], url_path='last-incident', detail=False)
+    def last_data(self, request):
+        last_record = Incident.objects.filter(
+            status=0
+        ).last()
+        if last_record is None:
+            return Response({ "message": "There is no incident"}, status=404)
+        data_ser = IncidentSerializer(last_record)
+        return Response(data_ser.data, status=200)
+
     @action(methods=['PUT', 'GET'], detail=True, serializer_class=ResolveIncidentSerializer)
     def resolve(self, request, pk):
         instance = self.get_object()
