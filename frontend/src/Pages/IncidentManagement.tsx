@@ -58,6 +58,7 @@ export default function IncidentManagement() {
 
     useEffect(() => {
         checkLogin().then(() => {
+            setIsLoggedIn(true);
             _fetchLastIncident();
         }).catch(() => { setIsLoggedIn(false); setLoading(false) });
     }, [user]);
@@ -80,9 +81,9 @@ export default function IncidentManagement() {
                             <p>Humidité {lastIncident.temp}%</p>
                             <p>{getDifference(new Date(lastIncident.dt).getTime())}</p>
                             <form onSubmit={handleSubmit}>
-                                <textarea onChange={e => setComment(e.currentTarget.value)}
+                                <textarea value={comment}
+                                    onChange={e => setComment(e.currentTarget.value)}
                                     className="form-control" placeholder="Type your comment...">
-                                    {comment}
                                 </textarea>
                                 <button className="mt-2 btn btn-success" type="submit">Acquitter</button>
                             </form>
