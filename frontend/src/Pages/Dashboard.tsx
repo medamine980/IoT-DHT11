@@ -143,7 +143,7 @@ export default function Dashboard() {
   return (
     <div className="container-fluid p-0">
       <h1 className="h3 mb-3">
-        <strong>Overview</strong> Dashboard
+        <strong>Tableau de bord</strong> de présentation
       </h1>
 
       {/* Cards Row */}
@@ -153,7 +153,7 @@ export default function Dashboard() {
           <div className="card shadow-sm rounded">
             <div className="card-body p-4">
               <div className="d-flex justify-content-between align-items-center">
-                <h5 className="card-title mb-0">Temperature</h5>
+                <h5 className="card-title mb-0">Température</h5>
                 <i
                   className="bi bi-thermometer text-primary"
                   style={{ fontSize: "2rem" }}
@@ -163,7 +163,7 @@ export default function Dashboard() {
                 {temperature !== null ? `${temperature} °C` : "Loading..."}
               </h1>
               <span className="text-success">
-                Last update: {lastUpdate || "Loading..."}
+                Dernière mise à jour: {lastUpdate || "Loading..."}
               </span>
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function Dashboard() {
           <div className="card shadow-sm rounded">
             <div className="card-body p-4">
               <div className="d-flex justify-content-between align-items-center">
-                <h5 className="card-title mb-0">Humidity</h5>
+                <h5 className="card-title mb-0">Humidité</h5>
                 <i
                   className="bi bi-moisture text-info"
                   style={{ fontSize: "2rem" }}
@@ -184,7 +184,7 @@ export default function Dashboard() {
                 {humidity !== null ? `${humidity}%` : "Loading..."}
               </h1>
               <span className="text-success">
-                Last update: {lastUpdate || "Loading..."}
+                Dernière mise à jour: {lastUpdate || "Loading..."}
               </span>
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function Dashboard() {
         <div className="col-xl-6 col-md-12 mb-4">
           <div className="card shadow-sm rounded">
             <div className="card-body" style={{ height: "400px" }}>
-              <h5 className="card-title">Temperature Over Time</h5>
+              <h5 className="card-title">Température au fil du temps</h5>
               <canvas ref={chartRefTemp}></canvas>
             </div>
           </div>
@@ -207,7 +207,7 @@ export default function Dashboard() {
         <div className="col-xl-6 col-md-12 mb-4">
           <div className="card shadow-sm rounded">
             <div className="card-body" style={{ height: "400px" }}>
-              <h5 className="card-title">Humidity Over Time</h5>
+              <h5 className="card-title">Humidité au fil du temps</h5>
               <canvas ref={chartRefHumidity}></canvas>
             </div>
           </div>

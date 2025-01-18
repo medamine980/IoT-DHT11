@@ -21,7 +21,7 @@ function Sidebar() {
           <li className={`sidebar-item ${location.pathname === '/Dashboard' ? 'active' : ''}`}>
             <Link className="sidebar-link" to="/Dashboard">
               <i className="align-middle" data-feather="sliders"></i>
-              <span className="align-middle">Dashboard</span>
+              <span className="align-middle">Tableau de bord</span>
             </Link>
           </li>
 
