@@ -1,6 +1,6 @@
 import os
 import csv
-from ..models import DHT11
+from ..models import DHT11, Incident
 from ..serializers import DHT11serialize,IncidentSerializer
 from rest_framework.decorators import action
 from rest_framework import status
@@ -74,6 +74,10 @@ class DHTViewSet(ModelViewSet):
                 if incident_serializer.is_valid():
                     incident_serializer.save()
 
+            else:
+                last_incident = Incident.objects.filter(status=0).last()
+                last_incident.status = 1
+                last_incident.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
