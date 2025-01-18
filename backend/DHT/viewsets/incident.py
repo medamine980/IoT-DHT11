@@ -14,6 +14,11 @@ class IncidentViewSet(
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
 
+    def get_permissions(self):
+        if self.action in ['resolve']:
+            return [IsAuthenticated()]
+        return [AllowAny()]
+
     # @action(methods=['GET'], detail=False, serializer_class=ResolveIncidentSerializer)
     # def resolve(self, request, pk):
     #     instance = self.get_object()
@@ -36,6 +41,7 @@ class IncidentViewSet(
         if request.method == 'GET':
             return Response(self.serializer_class(instance).data)
         instance.status = 1
+        instance.resolver = request.user.id
         serializer = self.serializer_class(instance, data=request.data)
         if serializer.is_valid():
             serializer.save()
