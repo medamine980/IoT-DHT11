@@ -70,6 +70,8 @@ npm install
 | ------ | ---------------- | ------------------------------------ |
 | GET    | /api/incidents | Get all *incidents* |
 | GET    | /api/incidents/{id}  | Get *incident* with id={id}              |
+| GET    | /api/incidents/last-incident  | Get latest *incident* with status unresolved |
+| PUT    | /api/incidents/{id}/resolve  | Resolve *incident* with id={id} |
 
 #### Extra
 
