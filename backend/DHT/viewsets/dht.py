@@ -67,8 +67,8 @@ class DHTViewSet(ModelViewSet):
             serializer.save()
             temp = DHT11.objects.last().temp
             if temp > ALERT_TEMP:
-                # whatsapp_alert.send_message('Il y a une alerte importante sur votre Capteura température dépasse le seuil')
-                # email_alert.send_mail('TEMP', f'La température dépasse le seuil de {ALERT_TEMP}°C, Veuillez intervenir immédiatement pour vérifier et corriger cette situation')
+                whatsapp_alert.send_message('Il y a une alerte importante sur votre Capteura température dépasse le seuil')
+                email_alert.send_mail('TEMP', f'La température dépasse le seuil de {ALERT_TEMP}°C, Veuillez intervenir immédiatement pour vérifier et corriger cette situation')
                 telegram_alert.send_message(f'La température dépasse le seuil de {ALERT_TEMP}°C ,Veuillez intervenir immédiatement pour vérifier et corriger cette situation')
                 incident_serializer = IncidentSerializer(data=request.data)
                 if incident_serializer.is_valid():
